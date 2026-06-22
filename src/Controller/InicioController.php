@@ -15,4 +15,20 @@ final class InicioController extends AbstractController
             'controller_name' => 'InicioController',
         ]);
     }
+
+    #[Route('/info', name: 'app_info')]
+    public function info(): Response
+    {
+        return $this->render('inicio/info.html.twig', [
+            'controller_name' => 'InicioController',
+        ]);
+    }
+
+    #[Route('/ayuda', name: 'app_ayuda')]
+    public function ayuda(): Response
+    {
+        return $this->render('inicio/ayuda.html.twig', [
+            'controller_name' => 'InicioController',
+        ]);
+    }
 }
