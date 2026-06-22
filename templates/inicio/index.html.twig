@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Inicio | Mascotas SC
+{% endblock %}
+
+{% block body %}
+
+{% include 'components/header/header_inicio.html.twig' %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <img
+                    src="{{ asset('imagenes_pagina/logo-escritorio.png') }}"
+                    class="img-fluid"
+                    alt="Mascotas SC">
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <h1 class="display-4 fw-bold">
+
+                    Sistema de Registro de Mascotas
+
+                </h1>
+
+                <p class="lead mt-4">
+
+                    Identifica, registra y protege
+                    a tu mascota de forma rápida,
+                    segura y gratuita.
+
+                </p>
+
+                <div class="mt-4">
+
+                    <a href="#"
+                       class="btn btn-primary btn-lg me-3">
+
+                        Registrarme
+                    </a>
+
+                    <a href="#"
+                       class="btn btn-outline-primary btn-lg">
+
+                        Saber más
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h3>
+                    Cuenta Particular
+                </h3>
+
+                <p>
+                    Registra tus mascotas y genera
+                    su identificación digital.
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3>
+                    Cuenta Voluntario
+                </h3>
+
+                <p>
+                    Ayuda a reportar mascotas
+                    perdidas o encontradas.
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3>
+                    Cuenta Administrador
+                </h3>
+
+                <p>
+                    Gestiona usuarios,
+                    reportes y registros.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <h2>
+                ¿Qué podemos ofrecer?
+            </h2>
+
+            <p class="mt-3">
+
+                ✔ Registro de mascotas
+
+                <br>
+
+                ✔ Generación de QR
+
+                <br>
+
+                ✔ Tarjeta de identificación
+
+                <br>
+
+                ✔ Reportes de mascotas perdidas
+
+                <br>
+
+                ✔ Gestión de vacunas
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% include 'components/footer/footer_inicio.html.twig' %}
+
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,6 +32,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Persona $persona = null;
+
+    /**
+     * @var Collection<int, Mascota>
+     */
+    #[ORM\OneToMany(targetEntity: Mascota::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $mascotas;
+
+    public function __construct()
+    {
+        $this->mascotas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,5 +127,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    public function getPersona(): ?Persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(?Persona $persona): static
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mascota>
+     */
+    public function getMascotas(): Collection
+    {
+        return $this->mascotas;
+    }
+
+    public function addMascota(Mascota $mascota): static
+    {
+        if (!$this->mascotas->contains($mascota)) {
+            $this->mascotas->add($mascota);
+            $mascota->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMascota(Mascota $mascota): static
+    {
+        if ($this->mascotas->removeElement($mascota)) {
+            // set the owning side to null (unless already changed)
+            if ($mascota->getUser() === $this) {
+                $mascota->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
