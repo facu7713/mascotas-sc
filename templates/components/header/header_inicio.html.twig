@@ -1,46 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
     <div class="container">
 
-        <a class="navbar-brand fw-bold text-primary" href="{{ path('app_inicio') }}">
+        <a class="navbar-brand" href="{{ path('app_inicio') }}">
+
             <img
                 src="{{ asset('imagenes_pagina/logo-navbar.png') }}"
-                alt="Logo"
-                width="200">
+                alt="Mascotas SC"
+                width="190"
+                class="img-fluid">
+
         </a>
 
         <button
-            class="navbar-toggler"
+            class="navbar-toggler border-0"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#menu">
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Abrir menú">
 
             <span class="navbar-toggler-icon"></span>
+
         </button>
 
-        <div class="collapse navbar-collapse" id="menu">
+        <div
+            class="collapse navbar-collapse"
+            id="menu">
 
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-4 ">
 
-                <li class="nav-item me-lg-3">
-                    <a class="nav-link" href="{{ path('app_login') }}">
-                        Iniciar sesión
-                    </a>
-                </li>
-
-                <li class="nav-item me-lg-3">
-                    <a class="btn btn-success" href="{{ path('app_registro') }}">
-                        Registrarse
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="{{ path('app_inicio') }}">
+                        Inicio
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_ayuda') }}">
+                    <a class="nav-link fw-semibold" href="{{ path('app_info') }}">
+                        Saber más
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="{{ path('app_ayuda') }}">
                         Ayuda
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary px-4" href="{{ path('app_login') }}">
+                        Iniciar sesión
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-primary px-4" href="{{ path('app_registro') }}">
+                        Registrarse
                     </a>
                 </li>
 
             </ul>
 
         </div>
+
     </div>
+
 </nav>
