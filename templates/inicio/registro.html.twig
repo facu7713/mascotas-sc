@@ -52,6 +52,8 @@ Registro | Mascotas SC
                                         }
                                     }) }}
 
+                                    {{ form_errors(form.nombre) }}
+
                                 </div>
 
                                 <div class="col-md-6 mb-3">
@@ -63,6 +65,8 @@ Registro | Mascotas SC
                                             class: 'form-control'
                                         }
                                     }) }}
+
+                                    {{ form_errors(form.apellido) }}
 
                                 </div>
 
@@ -80,6 +84,8 @@ Registro | Mascotas SC
                                         }
                                     }) }}
 
+                                    {{ form_errors(form.dni) }}
+
                                 </div>
 
                                 <div class="col-md-6 mb-3">
@@ -91,6 +97,8 @@ Registro | Mascotas SC
                                             class: 'form-control'
                                         }
                                     }) }}
+
+                                    {{ form_errors(form.telefono) }}
 
                                 </div>
 
@@ -105,6 +113,8 @@ Registro | Mascotas SC
                                         class: 'form-control'
                                     }
                                 }) }}
+
+                                {{ form_errors(form.direccion) }}
 
                             </div>
 
@@ -126,6 +136,8 @@ Registro | Mascotas SC
                                     }
                                 }) }}
 
+                                {{ form_errors(form.email) }}
+
                             </div>
 
                             <div class="mb-4">
@@ -137,6 +149,8 @@ Registro | Mascotas SC
                                         class: 'form-control'
                                     }
                                 }) }}
+
+                                {{ form_errors(form.password) }}
 
                             </div>
 

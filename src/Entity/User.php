@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,9 +19,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'El correo electrónico es obligatorio.')]
+    #[Assert\Email(message: 'Ingrese un correo electrónico válido.')]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'El correo electrónico no puede superar los {{ limit }} caracteres.'
+    )]
     private ?string $email = null;
-
+    
     /**
      * @var list<string> The user roles
      */
