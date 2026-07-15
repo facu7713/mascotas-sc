@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Panel Particular | Mascotas SC
+{% endblock %}
+
+{% block body %}
+
+<div class="d-flex min-vh-100">
+
+    {% include 'components/particular/sidebar.html.twig' %}
+
+    <div class="flex-grow-1 d-flex flex-column">
+
+        {% include 'components/particular/header.html.twig' %}
+
+        <main class="container-fluid p-4">
+
+            {% block contenido %}
+
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        console.log("JavaScript cargado");
+
+        const btnMenu = document.getElementById('btnMenu');
+        const sidebar = document.getElementById('sidebar');
+
+        console.log(btnMenu);
+        console.log(sidebar);
+
+        if (btnMenu && sidebar) {
+
+            btnMenu.addEventListener('click', function () {
+
+                sidebar.classList.toggle('sidebar-open');
+
+            });
+
+        }
+
+    </script>
+
+{% endblock %}

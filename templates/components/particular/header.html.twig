@@ -1,0 +1,56 @@
+<header class="bg-white shadow-sm border-bottom">
+
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+
+            <!-- Título de la página -->
+
+            <div>
+
+                <div class="text-center mb-4">
+
+                    <a class="navbar-brand" href="{{ path('app_particular') }}">
+
+                        <img
+                            src="{{ asset('imagenes_pagina/logo-navbar.png') }}"
+                            alt="Mascotas SC"
+                            width="190"
+                            class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Información del usuario -->
+
+            <div class="d-flex align-items-center">
+
+                <span class="me-3 text-secondary">
+
+                    Bienvenido,
+
+                    <strong>
+
+                        {{ app.user.persona.nombre }}
+
+                    </strong>
+
+                </span>
+
+                <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+                    style="width:45px;height:45px;">
+
+                    <i class="bi bi-person-fill fs-5"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
