@@ -6,23 +6,105 @@ Inicio | Mascotas SC
 
 {% block contenido %}
 
-    <div class="text-center mb-4">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">¡Bienvenido/a a tu espacio personal!</h2>
-                <img src="imagenes_pagina/logo-escritorio.png"  width="400" class="img-fluid" alt="">
-                <p class="fs-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 col-xl-7 text-center">
+
+                <h1 class="display-5 fw-bold mb-4">
+
+                    ¡Bienvenido/a a tu espacio personal!
+
+                </h1>
+
+                <img
+                    src="{{ asset('imagenes_pagina/logo-escritorio.png') }}"
+                    class="img-fluid mb-4"
+                    width="500"
+                    alt="Mascotas SC">
+
+                <p class="lead">
+
                     Desde aquí podrás gestionar toda la información relacionada con tus mascotas:
-                    registrarlas, visualizar sus tarjetas de identificación, reportar si se pierden o si encontrás una,
-                    y hasta postularte como voluntario para ayudar a otros animales.
+                    registrarlas, visualizar sus tarjetas de identificación, reportar si se pierden
+                    o si encontrás una y postularte como voluntario para ayudar a otros animales.
+
                 </p>
-                <p class="fs-6 text-muted">
-                    Esta plataforma está diseñada para acompañarte en el cuidado responsable de tus mascotas
-                    y facilitar la conexión con la comunidad en caso de emergencias o adopciones.
+
+                <p class="text-muted fs-5">
+
+                    Esta plataforma fue diseñada para acompañarte en el cuidado responsable de tus
+                    mascotas y facilitar la colaboración entre los miembros de la comunidad.
+
                 </p>
-                <p class="fs-6 text-muted">
+
+                <p class="fst-italic text-secondary mt-4">
+
                     "Tus mascotas son parte de tu familia. Ayudanos a cuidarlas juntos."
+
                 </p>
+
+                <hr class="my-5">
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body">
+
+                                <i class="bi bi-file-earmark-plus fs-1 text-primary"></i>
+
+                                <h4 class="mt-3">
+
+                                    Registrar Mascota
+
+                                </h4>
+
+                                <p class="text-muted">
+
+                                    Agregá una nueva mascota al sistema y obtené su identificación.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body">
+
+                                <i class="bi bi-card-list fs-1 text-success"></i>
+
+                                <h4 class="mt-3">
+
+                                    Mis Mascotas
+
+                                </h4>
+
+                                <p class="text-muted">
+
+                                    Consultá todas tus mascotas registradas y administrá su información.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
+
 
 {% endblock %}
