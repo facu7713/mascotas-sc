@@ -1,0 +1,114 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="{{ path('app_particular') }}">
+
+            <img
+                src="{{ asset('imagenes_pagina/logo-navbar.png') }}"
+                alt="Mascotas SC"
+                width="160"
+                class="img-fluid">
+
+        </a>
+
+        <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-2 ">
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="{{ path('app_particular') }}">
+                        <i class="bi bi-house-door fs-5"></i> Inicio
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-file-earmark-plus fs-5"></i> Registrar 
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-card-list fs-5"></i> Mis Mascotas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-prescription2"></i> Vacunas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-person-badge fs-5"></i> Ser Voluntario
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-question-circle fs-5"></i> Ayuda
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">
+                        <i class="bi bi-box-arrow-left fs-5"></i> Cerrar sesión
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!-- Información del usuario -->
+
+                    <a class="nav-link fw-semibold" href="#">
+
+                        <div class="d-flex align-items-center">
+
+                            <span class="me-3 text-secondary">
+
+                                Hola,
+
+                                <strong>
+
+                                    {{ app.user.persona.nombre }} {{ app.user.persona.apellido }}
+
+                                </strong>
+
+                            </span>
+
+                            <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+                                style="width:45px; 
+                                height:45px;">
+
+                                <i class="bi bi-person-fill fs-5"></i>
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
