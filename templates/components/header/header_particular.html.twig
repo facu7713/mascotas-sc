@@ -29,7 +29,7 @@
             class="collapse navbar-collapse"
             id="menu">
 
-            <ul class="navbar-nav ms-auto align-items-center text-center gap-2">
+            <ul class="navbar-nav ms-auto align-items-center text-center gap-4">
 
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" href="{{ path('app_particular') }}">
@@ -38,14 +38,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="#">
+                    <a class="nav-link fw-semibold" href="{{ path('app_mascota_registro') }}">
                         <i class="bi bi-file-earmark-plus fs-5"></i> Registrar 
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="#">
-                        <i class="bi bi-card-list fs-5"></i> Mis Mascotas
+                    <a class="nav-link fw-semibold" href="{{ path('app_tarjeta_id') }}">
+                        <i class="bi bi-card-list fs-5"></i> Mascotas
                     </a>
                 </li>
 
@@ -57,7 +57,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" href="#">
-                        <i class="bi bi-person-badge fs-5"></i> Ser Voluntario
+                        <i class="bi bi-person-badge fs-5"></i> Voluntario
                     </a>
                 </li>
 
@@ -69,7 +69,7 @@
 
                 <li class="nav-item">
                     <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">
-                        <i class="bi bi-box-arrow-left fs-5"></i> Cerrar sesión
+                        <i class="bi bi-box-arrow-left fs-5"></i> Cerrar
                     </a>
                 </li>
 
@@ -81,12 +81,12 @@
                         <div class="d-flex align-items-center">
 
                             <span class="me-3 text-secondary">
-
+                            
                                 Hola,
 
                                 <strong>
 
-                                    {{ app.user.persona.nombre }} {{ app.user.persona.apellido }}
+                                    {{ app.user.persona.apellido }} {{ app.user.persona.nombre }}
 
                                 </strong>
 
