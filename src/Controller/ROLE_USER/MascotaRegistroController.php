@@ -64,7 +64,7 @@ final class MascotaRegistroController extends AbstractController
             // 3. Generar la URL absoluta a la que apuntará el QR
             $payloadUrl = $this->generateUrl(
                 'app_tarjeta_id', 
-                ['id' => $mascota->getId()], 
+                [], 
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 

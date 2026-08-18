@@ -2,8 +2,9 @@
 
 namespace App\Service;
 
-use Chillerlan\QRCode\QRCode;
-use Chillerlan\QRCode\QROptions;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+use chillerlan\QRCode\Common\EccLevel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class QrCodeGeneratorService
@@ -15,25 +16,29 @@ class QrCodeGeneratorService
 
     public function generateForMascota(int $mascotaId, string $payloadUrl): string
     {
-        // Crear directorio si no existe
+        // 1. Crear el directorio si no existe
         if (!is_dir($this->targetDirectory)) {
             mkdir($this->targetDirectory, 0775, true);
         }
 
+        // 2. Configurar opciones
         $options = new QROptions([
-            'outputType'  => QRCode::OUTPUT_IMAGE_PNG,
-            'eccLevel'    => QRCode::ECC_L,
-            'scale'       => 3,
-            'imageBase64' => false,
+            'outputType'  => 'png',
+            'eccLevel'    => EccLevel::H,
+            'scale'       => 5,
+            'imageBase64' => false, 
         ]);
 
         $filename = sprintf('qr_mascota_%d_%s.png', $mascotaId, uniqid());
         $filePath = $this->targetDirectory . '/' . $filename;
 
-        // Generar y guardar la imagen en disco
-        (new QRCode($options))->render($payloadUrl, $filePath);
+        // 3. Generar la imagen binaria en memoria
+        $qrImageData = (new QRCode($options))->render($payloadUrl);
 
-        // Devuelve la ruta relativa dentro de public/
+        // 4. Guardar explícitamente el binario en el archivo
+        file_put_contents($filePath, $qrImageData);
+
+        // 5. Devuelve la ruta relativa para guardar en la BD
         return 'uploads/cod_qr/' . $filename;
     }
 }

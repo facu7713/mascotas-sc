@@ -8,11 +8,12 @@ Panel Particular | Mascotas SC
 
     {% include 'components/header/header_particular.html.twig' %}
 
-    <div class="d-flex min-vh-100">
+    <div class="d-flex min-vh-100 w-100">
 
-        <div class="d-flex flex-column">
+        <!-- Agregamos w-100 explícito aquí -->
+        <div class="d-flex flex-column w-100">
 
-            <main class="container-fluid p-4">
+            <main class="container-fluid p-4 w-100">
 
                 {% block contenido %}
 

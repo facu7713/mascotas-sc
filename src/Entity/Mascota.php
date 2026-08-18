@@ -30,8 +30,8 @@ class Mascota
     #[ORM\Column(length: 255)]
     private ?string $foto = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $codigoQR = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $codigoQr = null;
 
     #[ORM\Column(length: 30)]
     private ?string $estado = null;
@@ -131,14 +131,14 @@ class Mascota
         return $this;
     }
 
-    public function getCodigoQR(): ?string
+    public function getCodigoQr(): ?string
     {
-        return $this->codigoQR;
+        return $this->codigoQr;
     }
 
-    public function setCodigoQR(string $codigoQR): static
+    public function setCodigoQr(?string $codigoQr): static
     {
-        $this->codigoQR = $codigoQR;
+        $this->codigoQr = $codigoQr;
 
         return $this;
     }

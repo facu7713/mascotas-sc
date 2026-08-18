@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class TarjetaIdController extends AbstractController
 {
-    #[Route('/{id}', name: 'app_tarjeta_id')]
+    #[Route('', name: 'app_tarjeta_id')]
     public function index(Mascota $mascota): Response
     {
         return $this->render('particular/mis_mascotas/tarjetas_id.html.twig', [
