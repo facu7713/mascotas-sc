@@ -13,9 +13,6 @@ class TarjetaId
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $numeroTarjeta = null;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $fechaEmision = null;
 
@@ -25,18 +22,6 @@ class TarjetaId
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumeroTarjeta(): ?string
-    {
-        return $this->numeroTarjeta;
-    }
-
-    public function setNumeroTarjeta(string $numeroTarjeta): static
-    {
-        $this->numeroTarjeta = $numeroTarjeta;
-
-        return $this;
     }
 
     public function getFechaEmision(): ?\DateTimeImmutable
@@ -61,5 +46,10 @@ class TarjetaId
         $this->mascota = $mascota;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->fechaEmision = new \DateTimeImmutable();
     }
 }

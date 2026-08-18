@@ -17,7 +17,7 @@ class MascotaType extends AbstractType
         $builder
             ->add('imagen', FileType::class, [
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
             ])
 
             ->add('nombre', TextType::class)
