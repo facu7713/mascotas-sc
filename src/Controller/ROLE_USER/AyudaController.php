@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class AyudaController extends AbstractController
 {
-    #[Route('', name: 'app_ayuda')]
+    #[Route('', name: 'app_ayuda_part')]
     public function index(): Response
     {
         return $this->render('particular/ayuda/ayuda.html.twig');
