@@ -1,0 +1,150 @@
+{% extends 'ver_mascota.html.twig' %}
+
+{% block title %}
+    Datos de {{ mascota.nombre }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-md-10 col-lg-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h1 class="text-center mb-4">
+                        Datos de la mascota
+                    </h1>
+
+                    {# Foto de la mascota #}
+
+                    {% if mascota.foto %}
+                        <div class="text-center mb-4">
+
+                            <img
+                                src="{{ asset(mascota.foto) }}"
+                                alt="Foto de {{ mascota.nombre }}"
+                                class="img-fluid rounded"
+                                style="max-height: 300px;"
+                            >
+
+                        </div>
+                    {% endif %}
+
+
+                    {# Datos de la mascota #}
+
+                    <h3 class="mb-3">
+                        Información de la mascota
+                    </h3>
+
+                    <ul class="list-group mb-4">
+
+                        <li class="list-group-item">
+                            <strong>Nombre:</strong>
+                            {{ mascota.nombre }}
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Tipo:</strong>
+                            {{ mascota.tipo }}
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Género:</strong>
+                            {{ mascota.genero }}
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Color:</strong>
+                            {{ mascota.color }}
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Estado:</strong>
+                            {{ mascota.estado }}
+                        </li>
+
+                    </ul>
+
+
+                    {# Datos del propietario #}
+
+                    <h3 class="mb-3">
+                        Información del propietario
+                    </h3>
+
+                    {% if mascota.user and mascota.user.persona %}
+
+                        <ul class="list-group mb-4">
+
+                            <li class="list-group-item">
+                                <strong>Nombre:</strong>
+                                {{ mascota.user.persona.nombre }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Apellido:</strong>
+                                {{ mascota.user.persona.apellido }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Dirección:</strong>
+                                {{ mascota.user.persona.direccion }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Telefono:</strong>
+                                {{ mascota.user.persona.telefono }}
+                            </li>
+
+                        </ul>
+
+                    {% else %}
+
+                        <p class="text-muted">
+                            No hay información del propietario.
+                        </p>
+
+                    {% endif %}
+
+
+                    {# Tarjeta de identificación #}
+
+                    {% if mascota.tarjetaId %}
+
+                        <h3 class="mb-3">
+                            Tarjeta de identificación
+                        </h3>
+
+                        <ul class="list-group">
+
+                            <li class="list-group-item">
+                                <strong>ID de tarjeta:</strong>
+                                {{ mascota.tarjetaId.id }}
+                            </li>
+
+                            <li class="list-group-item">
+                                <strong>Fecha de emisión:</strong>
+                                {{ mascota.tarjetaId.fechaEmision|date('d/m/Y') }}
+                            </li>
+
+                        </ul>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
