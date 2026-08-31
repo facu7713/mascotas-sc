@@ -6,6 +6,7 @@ use App\Repository\MascotaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MascotaRepository::class)]
 class Mascota
@@ -16,15 +17,19 @@ class Mascota
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Debes ingresar el nombre de la mascota.')]
     private ?string $nombre = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Debes elegir el tipo de mascota.')]
     private ?string $tipo = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Debes poner el color de la mascota.')]
     private ?string $color = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: 'Debes elegir el genero de la mascota.')]
     private ?string $genero = null;
 
     #[ORM\Column(length: 255)]
@@ -34,6 +39,7 @@ class Mascota
     private ?string $codigoQr = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank(message: 'Debes elegir el estado de la mascota.')]
     private ?string $estado = null;
 
     #[ORM\ManyToOne(inversedBy: 'mascotas')]
