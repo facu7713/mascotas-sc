@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Mascota;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,16 @@ class MascotaRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Mascota::class);
+    }
+
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

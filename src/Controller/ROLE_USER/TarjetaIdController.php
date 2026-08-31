@@ -13,19 +13,27 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class TarjetaIdController extends AbstractController
 {
-    #[Route('/{id}', name: 'app_tarjeta_id')]
+    #[Route('', name: 'app_tarjeta_id')]
     public function index(
-        int $id,
-        MascotaRepository $mascotaRepository): Response
-    {
-        $mascotas = $mascotaRepository->findAll($id);
+        MascotaRepository $mascotaRepository
+    ): Response {
+
+        $usuario = $this->getUser();
+
+        $mascotas = $mascotaRepository->findByUser($usuario);
 
         if (!$mascotas) {
-            $this->addFlash('warning', 'No tenes mascotas registradas');
+            $this->addFlash(
+                'warning',
+                'No tenés mascotas registradas.'
+            );
         }
 
-        return $this->render('particular/mis_mascotas/tarjetas_id.html.twig', [
-            'mascota' => $mascotas,
-        ]);
+        return $this->render(
+            'particular/mis_mascotas/tarjetas_id.html.twig',
+            [
+                'mascotas' => $mascotas,
+            ]
+        );
     }
 }
