@@ -12,6 +12,25 @@
             Mis Mascotas
         </h1>
 
+        {% for message in app.flashes('success') %}
+
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+
+                <i class="bi bi-bookmark-check"></i>
+
+                    {{ message }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Cerrar">
+                    </button>
+
+            </div>
+
+        {% endfor %}
+
         {% for message in app.flashes('warning') %}
 
             <div class="alert alert-warning text-center">
@@ -44,7 +63,7 @@
                                 </h3>
 
                                 <span class="badge bg-primary fs-6">
-                                    TARJETA ID: {{ mascota.id }}
+                                    TARJETA ID: {{ mascota.tarjetaId.id }}
                                 </span>
 
                             </div>

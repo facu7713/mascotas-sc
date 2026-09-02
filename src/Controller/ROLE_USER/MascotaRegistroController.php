@@ -77,7 +77,7 @@ final class MascotaRegistroController extends AbstractController
 
             $this->addFlash('success', 'La mascota fue registrada correctamente.');
 
-            return $this->redirectToRoute('app_mascota_registro');
+            return $this->redirectToRoute('app_tarjeta_id');
         }
 
         return $this->render('particular/registro_mascota/registro.html.twig', [
