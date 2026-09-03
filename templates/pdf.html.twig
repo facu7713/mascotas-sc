@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Ficha de Mascota</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
+            .card { border: 1px solid #ccc; padding: 15px; margin-top: 20px; border-radius: 8px; }
+            .qr-code { text-align: center; margin-top: 20px; }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Ficha Id de la Mascota</h1>
+        </div>
+
+        <div class="card">
+            <img
+                src="{{ project_dir }}/public/{{ mascota.foto }}"
+                alt="Foto de {{ mascota.nombre }}"
+                style="width: 250px; height: 200px; object-fit: cover;"
+            >
+            <h2>Nombre: {{ mascota.nombre }}</h2>
+            <p><strong>Tipo:</strong> {{ mascota.tipo }}</p>
+            <p><strong>Género:</strong> {{ mascota.genero }}</p> 
+            <p><strong>Color:</strong> {{ mascota.color }}</p>  
+        </div>
+
+        <div class="qr-code">
+            <h3>Código QR de Identificación</h3>
+            <img src="{{ project_dir }}/public/{{ mascota.codigoQr }}" style="width: 150px; height: 150px;">
+        </div>
+        
+    </body>
+
+</html>
