@@ -14,36 +14,56 @@ class MascotaPdfController extends AbstractController
     #[Route('/mascota/{id}/pdf', name: 'app_mascota_pdf')]
     public function descargarPdf(Mascota $mascota): Response
     {
-        // 1. Configurar las opciones de Dompdf
+        $projectDir = $this->getParameter('kernel.project_dir');
+
+        $propietario = $mascota->getUser()->getPersona();
+
+        // 1. Convertir la foto de la mascota a Base64
+        $fotoBase64 = null;
+        if ($mascota->getFoto()) {
+            $fotoPath = $projectDir . '/public/' . ltrim($mascota->getFoto(), '/');
+            if (file_exists($fotoPath)) {
+                $ext = pathinfo($fotoPath, PATHINFO_EXTENSION);
+                $fotoData = file_get_contents($fotoPath);
+                $fotoBase64 = 'data:image/' . $ext . ';base64,' . base64_encode($fotoData);
+            }
+        }
+
+        // 2. Convertir el QR SVG a Base64
+        $qrBase64 = null;
+        if ($mascota->getCodigoQr()) {
+            $qrPath = $projectDir . '/public/' . ltrim($mascota->getCodigoQr(), '/');
+            if (file_exists($qrPath)) {
+                $qrData = file_get_contents($qrPath);
+                $qrBase64 = 'data:image/svg+xml;base64,' . base64_encode($qrData);
+            }
+        }
+
+        // 3. Configurar Dompdf
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        $pdfOptions->set('isRemoteEnabled', true); // Permite cargar imágenes externas o locales
+        $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('isHtml5ParserEnabled', true);
 
-        // 2. Instanciar Dompdf
         $dompdf = new Dompdf($pdfOptions);
 
-        // 3. Renderizar la plantilla Twig a una cadena HTML
+        // 4. Renderizar la plantilla Twig enviando las variables Base64
         $html = $this->renderView('pdf.html.twig', [
-            'mascota' => $mascota,
-            'project_dir' => $this->getParameter('kernel.project_dir'),
+            'mascota'    => $mascota,
+            'propietario' => $propietario,
+            'fotoBase64' => $fotoBase64,
+            'qrBase64'   => $qrBase64,
         ]);
 
-        // 4. Cargar el HTML en Dompdf
         $dompdf->loadHtml($html);
-
-        // 5. Configurar el tamaño y orientación de página ('portrait' o 'landscape')
         $dompdf->setPaper('A4', 'portrait');
-
-        // 6. Renderizar el PDF
         $dompdf->render();
 
-        // 7. Enviar la respuesta al navegador
         return new Response(
             $dompdf->output(),
             200,
             [
                 'Content-Type' => 'application/pdf',
-                // 'inline' abre el PDF en la pestaña; 'attachment' fuerza la descarga directa:
                 'Content-Disposition' => 'inline; filename="ficha_mascota_' . $mascota->getId() . '.pdf"',
             ]
         );

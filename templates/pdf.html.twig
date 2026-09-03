@@ -7,7 +7,7 @@
         <style>
             body { font-family: Arial, sans-serif; margin: 20px; }
             .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
-            .card { border: 1px solid #ccc; padding: 15px; margin-top: 20px; border-radius: 8px; }
+            .card { text-align: center; border: 1px solid #ccc; padding: 15px; margin-top: 20px; border-radius: 8px; }
             .qr-code { text-align: center; margin-top: 20px; }
         </style>
     </head>
@@ -18,20 +18,36 @@
         </div>
 
         <div class="card">
-            <img
-                src="{{ project_dir }}/public/{{ mascota.foto }}"
-                alt="Foto de {{ mascota.nombre }}"
-                style="width: 250px; height: 200px; object-fit: cover;"
-            >
+            <h2>Tarjeta ID N° {{ mascota.tarjetaId.id }}</h2>
+            {% if fotoBase64 %}
+                <img
+                    src="{{ fotoBase64 }}"
+                    alt="Foto de {{ mascota.nombre }}"
+                    style="width: 100%; 
+                        max-width: 250px; 
+                        height: 200px; 
+                        object-fit: cover; 
+                        border-radius: 8px;"
+                >
+            {% endif %}
             <h2>Nombre: {{ mascota.nombre }}</h2>
             <p><strong>Tipo:</strong> {{ mascota.tipo }}</p>
             <p><strong>Género:</strong> {{ mascota.genero }}</p> 
-            <p><strong>Color:</strong> {{ mascota.color }}</p>  
+            <p><strong>Color:</strong> {{ mascota.color }}</p>
+            <p><strong>Fecha de emisión:</strong> {{ mascota.tarjetaId.fechaEmision|date('d/m/Y') }}</p>   
+            <h1>Datos del dueño</h1>
+            <h2>Propietario: {{ propietario.nombre }} {{ propietario.apellido }}</h2>
+            <p><strong>DNI:</strong> {{ propietario.dni }}</p>
+            <p><strong>Dirección:</strong> {{ propietario.direccion }}</p>
+            <p><strong>Telefono:</strong> {{ propietario.telefono }}</p>
+            
         </div>
 
         <div class="qr-code">
             <h3>Código QR de Identificación</h3>
-            <img src="{{ project_dir }}/public/{{ mascota.codigoQr }}" style="width: 150px; height: 150px;">
+            {% if qrBase64 %}
+                <img src="{{ qrBase64 }}" style="width: 50px; height: 50px;">
+            {% endif %}
         </div>
         
     </body>

@@ -1,0 +1,246 @@
+{% extends 'base_particular.html.twig' %}
+
+{% block title %}
+Actualizar Mascota | Mascotas SC
+{% endblock %}
+
+{% block contenido %}
+
+<section class="bg-light">
+
+    <div class="container my-4">
+
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+
+            <h1 class="text-center mb-3">
+                Actualizar Mascota
+            </h1>
+
+            <p class="text-center text-muted mb-4">
+                Modificá los datos de {{ mascota.nombre }}.
+            </p>
+
+
+            {{ form_start(form, {
+                attr: {
+                    novalidate: 'novalidate'
+                }
+            }) }}
+
+
+            <div class="row g-4">
+
+                <!-- FOTO -->
+
+                <div class="col-md-4 text-center">
+
+                    <div class="mb-3">
+
+                        {% if mascota.foto %}
+
+                            <img
+                                id="previewImagen"
+                                src="{{ asset(mascota.foto) }}"
+                                class="img-thumbnail rounded-3 mb-2"
+                                alt="Foto de {{ mascota.nombre }}"
+                                style="
+                                    width: 200px;
+                                    height: 200px;
+                                    object-fit: cover;
+                                "
+                            >
+
+                        {% else %}
+
+                            <img
+                                id="previewImagen"
+                                src="https://via.placeholder.com/200?text=Sin+Foto"
+                                class="img-thumbnail rounded-3 mb-2"
+                                alt="Sin foto"
+                                style="
+                                    width: 200px;
+                                    height: 200px;
+                                    object-fit: cover;
+                                "
+                            >
+
+                        {% endif %}
+
+
+                        {{ form_widget(form.imagen, {
+                            attr: {
+                                class: 'form-control',
+                                accept: 'image/*'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.imagen) }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATOS -->
+
+                <div class="col-md-8">
+
+
+                    <div class="mb-3">
+
+                        {{ form_label(form.nombre) }}
+
+                        {{ form_widget(form.nombre, {
+                            attr: {
+                                class: 'form-control'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.nombre) }}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        {{ form_label(form.tipo) }}
+
+                        {{ form_widget(form.tipo, {
+                            attr: {
+                                class: 'form-control'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.tipo) }}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        {{ form_label(form.genero) }}
+
+                        {{ form_widget(form.genero, {
+                            attr: {
+                                class: 'form-control'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.genero) }}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        {{ form_label(form.estado) }}
+
+                        {{ form_widget(form.estado, {
+                            attr: {
+                                class: 'form-control'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.estado) }}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        {{ form_label(form.color) }}
+
+                        {{ form_widget(form.color, {
+                            attr: {
+                                class: 'form-control'
+                            }
+                        }) }}
+
+                        {{ form_errors(form.color) }}
+
+                    </div>
+
+
+                    <div class="text-end mt-4">
+
+                        <a
+                            href="{{ path('app_tarjeta_id', {
+                                id: app.user.id
+                            }) }}"
+                            class="btn btn-secondary me-2">
+
+                            Cancelar
+
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary px-4">
+
+                            <i class="bi bi-save"></i>
+
+                            Guardar cambios
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{ form_rest(form) }}
+
+            {{ form_end(form, {
+                render_rest: false
+            }) }}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const inputImagen =
+        document.querySelector('input[type="file"]');
+
+    const previewImagen =
+        document.getElementById('previewImagen');
+
+
+    if (inputImagen && previewImagen) {
+
+        inputImagen.addEventListener('change', (e) => {
+
+            const file = e.target.files[0];
+
+            if (file) {
+
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+
+                    previewImagen.src =
+                        event.target.result;
+
+                };
+
+                reader.readAsDataURL(file);
+            }
+
+        });
+
+    }
+
+});
+
+</script>
+
+{% endblock %}
