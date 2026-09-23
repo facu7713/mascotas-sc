@@ -1,0 +1,97 @@
+{% extends 'base_particular.html.twig' %}
+
+{% block title %}
+    Reportar Mi Mascota | Mascotas SC
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-8">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <div class="text-center mb-4">
+
+                        <i class="bi bi-megaphone text-danger"
+                            style="font-size: 3rem;">
+                        </i>
+
+                        <h2 class="fw-bold mt-2">
+                            Registrar reporte
+                        </h2>
+
+                        <p class="text-muted">
+                            Completá los datos de la mascota que querés reportar.
+                        </p>
+
+                    </div>
+
+                    {{ form_start(form) }}
+
+                        <div class="mb-3">
+                            {{ form_row(form.tipoReporte) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.nombreMascota) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.tipoMascota) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.color) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.ubicacion) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.descripcion) }}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form_row(form.foto) }}
+                        </div>
+
+                        <div class="d-flex flex-column flex-md-row gap-2">
+
+                            <a
+                                href="{{ path('app_reportes_mascotas') }}"
+                                class="btn btn-outline-secondary flex-fill"
+                            >
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Cancelar
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger flex-fill"
+                            >
+                                <i class="bi bi-send me-2"></i>
+                                Registrar reporte
+                            </button>
+
+                        </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

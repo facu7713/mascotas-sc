@@ -1,0 +1,486 @@
+{% extends 'base_particular.html.twig' %}
+
+{% block title %}
+    Registro de Reportes | Mascotas SC
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="container py-4">
+
+        <div class="text-center mb-1">
+
+            <h2 class="fw-bold mb-2">
+                Reportes de mascotas
+            </h2>
+
+            <p class="text-muted mb-4">
+                Consultá y registrá reportes de mascotas de San Cristóbal.
+            </p>
+
+            {% include 'components/header/header_reportes.html.twig' %}
+
+        </div>
+
+    </div>
+
+    <div class="container py-4 py-md-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-xl-9">
+
+                {% for message in app.flashes('success') %}
+
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+
+                        <i class="bi bi-bookmark-check"></i>
+
+                            {{ message }}
+
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Cerrar">
+                            </button>
+
+                    </div>
+
+                {% endfor %}
+
+                {# Encabezado #}
+                <div class="text-center mb-4">
+
+                    <div class="d-inline-flex align-items-center justify-content-center
+                                rounded-circle bg-danger bg-opacity-10 text-danger mb-3"
+                        style="width: 70px; height: 70px;">
+
+                        <i class="bi bi-megaphone-fill fs-2"></i>
+
+                    </div>
+
+                    <h2 class="fw-bold mb-2">
+                        Registrar un reporte
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Informá sobre una mascota perdida o encontrada
+                        para ayudar a reunirla con su familia.
+                    </p>
+
+                </div>
+
+                {# Barra de navegación de reportes #}
+
+                <div class="d-flex justify-content-center">
+
+                    <div class="bg-light rounded-pill p-1 shadow-sm">
+
+                        <a
+                            href="{{ path('app_reportes_mascotas') }}"
+                            class="btn btn-sm rounded-pill px-4"
+                        >
+                            <i class="bi bi-file-earmark-text me-1"></i>
+                            Registrar
+                        </a>
+
+                        <a
+                            href="#"
+                            class="btn btn-danger btn-sm rounded-pill px-4"
+                        >
+                            <i class="bi bi-search me-1"></i>
+                            Perdidos
+                        </a>
+
+                        <a
+                            href="#"
+                            class="btn btn-sm rounded-pill px-4"
+                        >
+                            <i class="bi bi-check-circle me-1"></i>
+                            Encontrados
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                {# Tarjeta principal #}
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+                    {# Cabecera de la tarjeta #}
+                    <div class="bg-danger text-white p-4">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="me-3">
+
+                                <div class="bg-white bg-opacity-25 rounded-3
+                                            d-flex align-items-center justify-content-center"
+                                    style="width: 50px; height: 50px;">
+
+                                    <i class="bi bi-file-earmark-text fs-4"></i>
+
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <h5 class="fw-bold mb-1">
+                                    Datos del reporte
+                                </h5>
+
+                                <small class="opacity-75">
+                                    Completá todos los datos de la mascota.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body p-4 p-md-5">
+
+                        {{ form_start(form) }}
+
+
+                        {# Tipo de reporte #}
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-exclamation-circle me-2 text-danger"></i>
+                                Tipo de reporte
+                            </label>
+
+                            {{ form_widget(
+                                form.tipoReporte,
+                                {
+                                    'attr': {
+                                        'class': 'form-select form-select-lg'
+                                    }
+                                }
+                            ) }}
+
+                            {{ form_errors(form.tipoReporte) }}
+
+                            <div class="form-text">
+                                Indicá si la mascota está perdida o fue encontrada.
+                            </div>
+
+                        </div>
+
+
+                        <hr class="my-4">
+
+
+                        {# Información de la mascota #}
+
+                        <div class="mb-4">
+
+                            <h5 class="fw-bold mb-1">
+                                <i class="bi bi-heart me-2 text-danger"></i>
+                                Información de la mascota
+                            </h5>
+
+                            <p class="text-muted small mb-4">
+                                Ingresá las características que permitan identificarla.
+                            </p>
+
+
+                            <div class="row g-3">
+
+                                <div class="col-12 col-md-6">
+
+                                    {{ form_label(
+                                        form.nombreMascota,
+                                        'Nombre de la mascota',
+                                        {
+                                            'label_attr': {
+                                                'class': 'form-label fw-semibold'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_widget(
+                                        form.nombreMascota,
+                                        {
+                                            'attr': {
+                                                'class': 'form-control form-control-lg',
+                                                'placeholder': 'Ej: Luna'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_errors(form.nombreMascota) }}
+
+                                </div>
+
+
+                                <div class="col-12 col-md-6">
+
+                                    {{ form_label(
+                                        form.tipoMascota,
+                                        'Tipo de mascota',
+                                        {
+                                            'label_attr': {
+                                                'class': 'form-label fw-semibold'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_widget(
+                                        form.tipoMascota,
+                                        {
+                                            'attr': {
+                                                'class': 'form-select form-select-lg'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_errors(form.tipoMascota) }}
+
+                                </div>
+
+
+                                <div class="col-12">
+
+                                    {{ form_label(
+                                        form.color,
+                                        'Color',
+                                        {
+                                            'label_attr': {
+                                                'class': 'form-label fw-semibold'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_widget(
+                                        form.color,
+                                        {
+                                            'attr': {
+                                                'class': 'form-control form-control-lg',
+                                                'placeholder': 'Ej: Marrón con manchas blancas'
+                                            }
+                                        }
+                                    ) }}
+
+                                    {{ form_errors(form.color) }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <hr class="my-4">
+
+
+                        {# Ubicación #}
+
+                        <div class="mb-4">
+
+                            <h5 class="fw-bold mb-1">
+                                <i class="bi bi-geo-alt me-2 text-danger"></i>
+                                Ubicación
+                            </h5>
+
+                            <p class="text-muted small mb-4">
+                                Indicá el barrio donde fue vista o encontrada.
+                            </p>
+
+
+                            {{ form_label(
+                                form.ubicacion,
+                                'Barrio',
+                                {
+                                    'label_attr': {
+                                        'class': 'form-label fw-semibold'
+                                    }
+                                }
+                            ) }}
+
+                            {{ form_widget(
+                                form.ubicacion,
+                                {
+                                    'attr': {
+                                        'class': 'form-select form-select-lg'
+                                    }
+                                }
+                            ) }}
+
+                            {{ form_errors(form.ubicacion) }}
+
+                        </div>
+
+
+                        {# Descripción #}
+
+                        <div class="mb-4">
+
+                            {{ form_label(
+                                form.descripcion,
+                                'Descripción',
+                                {
+                                    'label_attr': {
+                                        'class': 'form-label fw-semibold'
+                                    }
+                                }
+                            ) }}
+
+                            {{ form_widget(
+                                form.descripcion,
+                                {
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'rows': 5,
+                                        'placeholder': 'Describí dónde fue vista o encontrada, cuándo ocurrió y cualquier característica que pueda ayudar a identificarla...'
+                                    }
+                                }
+                            ) }}
+
+                            {{ form_errors(form.descripcion) }}
+
+                        </div>
+
+
+                        {# Foto #}
+
+                        <div class="mb-4">
+
+                            <h5 class="fw-bold mb-1">
+                                <i class="bi bi-camera me-2 text-danger"></i>
+                                Fotografía
+                            </h5>
+
+                            <p class="text-muted small mb-3">
+                                Una fotografía puede ayudar a identificar a la mascota.
+                            </p>
+
+                            <div class="border rounded-3 p-3 bg-light">
+
+                                <div class="text-center mb-3">
+
+                                    <img
+                                        id="previewImagen"
+                                        class="img-thumbnail rounded-3"
+                                        src="https://via.placeholder.com/200?text=Sin+Foto"
+                                        alt="Vista previa de imagen"
+                                        style="width: 200px; height: 200px; object-fit: cover;"
+                                    >
+
+                                </div>
+
+                                {{ form_label(
+                                    form.foto,
+                                    'Seleccionar fotografía',
+                                    {
+                                        'label_attr': {
+                                            'class': 'form-label fw-semibold'
+                                        }
+                                    }
+                                ) }}
+
+                                {{ form_widget(
+                                    form.foto,
+                                    {
+                                        'attr': {
+                                            'class': 'form-control',
+                                            'accept': 'image/*'
+                                        }
+                                    }
+                                ) }}
+
+                                {{ form_errors(form.foto) }}
+
+                                <div class="form-text">
+                                    Seleccioná una imagen de la mascota.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {# Aviso #}
+
+                        <div class="alert alert-danger bg-danger bg-opacity-10
+                                    border-0 d-flex align-items-start rounded-3 mb-4">
+
+                            <i class="bi bi-info-circle-fill me-3 mt-1"></i>
+
+                            <div>
+                                <strong>Importante</strong>
+                                <div class="small mt-1">
+                                    Verificá los datos antes de registrar el reporte.
+                                    La información ingresada será utilizada para ayudar
+                                    a identificar a la mascota.
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        {# Botones #}
+
+                        <div class="d-flex flex-column flex-md-row gap-2 pt-2">
+
+                            <a
+                                href="{{ path('app_reportes_mascotas') }}"
+                                class="btn btn-outline-secondary btn-lg flex-fill"
+                            >
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Cancelar
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger btn-lg flex-fill"
+                            >
+                                <i class="bi bi-send-fill me-2"></i>
+                                Registrar reporte
+                            </button>
+
+                        </div>
+
+
+                        {{ form_end(form) }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const inputFoto = document.querySelector('#reporte_foto');
+        const previewImagen = document.querySelector('#previewImagen');
+
+        if (inputFoto && previewImagen) {
+
+            inputFoto.addEventListener('change', function (event) {
+
+                const archivo = event.target.files[0];
+
+                if (archivo) {
+                    const url = URL.createObjectURL(archivo);
+                    previewImagen.src = url;
+                } else {
+                    previewImagen.src =
+                        'https://via.placeholder.com/200?text=Sin+Foto';
+                }
+
+            });
+
+        }
+    </script>
+
+{% endblock %}

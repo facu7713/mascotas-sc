@@ -1,0 +1,158 @@
+{% extends 'base_particular.html.twig' %}
+
+{% block title %}
+Registro de Reportes Encontrados | Mascotas SC
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="container py-4">
+
+        <div class="text-center mb-4">
+
+            <h2 class="fw-bold mb-2">
+                Reportes de mascotas encontradas
+            </h2>
+
+            <p class="text-muted mb-4">
+                Consultá y registrá reportes de mascotas de San Cristóbal.
+            </p>
+
+            {% include 'components/header/header_reportes.html.twig' %}
+
+        </div>
+
+    </div>
+
+    {% if reportes is empty %}
+
+        <div class="text-center py-5">
+
+            <i class="bi bi-search text-muted"
+            style="font-size: 4rem;">
+            </i>
+
+            <h4 class="fw-bold mt-3">
+                No hay mascotas reportadas como encontradas
+            </h4>
+
+            <p class="text-muted">
+                Actualmente no hay reportes de mascotas encontradas.
+            </p>
+
+        </div>
+
+    {% else %}
+
+        <div class="row g-4">
+
+            {% for reporte in reportes %}
+
+                <div class="col-12 col-md-6 col-xl-4">
+
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+
+                        {% if reporte.foto %}
+
+                            <img
+                                src="{{ asset(reporte.foto) }}"
+                                alt="{{ reporte.nombreMascota }}"
+                                class="card-img-top"
+                                style=" height: 300px; object-fit: cover;"
+                            >
+
+                        {% else %}
+
+                            <div
+                                class="bg-light d-flex align-items-center justify-content-center"
+                                style="height: 230px;"
+                            >
+                                <i class="bi bi-image text-muted"
+                                style="font-size: 5rem;">
+                                </i>
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+
+                                <h4 class="fw-bold mb-0">
+                                    {{ reporte.nombreMascota }}
+                                </h4>
+
+                                <span class="badge bg-danger">
+                                    ENCONTRADA
+                                </span>
+
+                            </div>
+
+
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-tag me-2"></i>
+                                {{ reporte.tipoMascota|capitalize }}
+                            </p>
+
+
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-palette me-2"></i>
+                                {{ reporte.color }}
+                            </p>
+
+
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                {{ reporte.ubicacion }}
+                            </p>
+
+
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-calendar3 me-2"></i>
+                                {{ reporte.fechaReporte|date('d/m/Y H:i') }}
+                            </p>
+
+
+                            <div class="bg-light rounded-3 p-3 mb-3">
+
+                                <small>
+                                    {{ reporte.descripcion }}
+                                </small>
+
+                            </div>
+
+
+                            <div class="d-grid gap-2">
+
+                                <a
+                                    href="#"
+                                    class="btn btn-outline-danger"
+                                >
+                                    <i class="bi bi-file-earmark-pdf me-2"></i>
+                                    Ver PDF
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="btn btn-outline-secondary"
+                                >
+                                    <i class="bi bi-trash me-2"></i>
+                                    Eliminar
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

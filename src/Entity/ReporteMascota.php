@@ -42,7 +42,7 @@ class ReporteMascota
     private ?string $foto = null;
 
     #[ORM\ManyToOne(inversedBy: 'reportes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Mascota $mascota = null;
 
     public function getId(): ?int

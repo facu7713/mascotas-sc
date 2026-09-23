@@ -3,7 +3,9 @@
 namespace App\Controller\ROLE_USER;
 
 use App\Entity\Mascota;
+use App\Entity\ReporteMascota;
 use App\Form\MascotaType;
+use App\Form\MascotaPerdidaType;
 use App\Repository\MascotaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -169,5 +171,59 @@ final class TarjetaIdController extends AbstractController
         );
 
         return $this->redirectToRoute('app_tarjeta_id');
+    }
+
+    #[Route('/{id}/reportar', name: 'app_mascota_reportar')]
+    public function reporte(
+        Mascota $mascota,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+
+        $reporte = new ReporteMascota();
+
+        $form = $this->createForm(
+            MascotaPerdidaType::class,
+            $reporte
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $reporte->setMascota($mascota);
+            $reporte->setTipoReporte('perdido');
+            $reporte->setNombreMascota($mascota->getNombre());
+            $reporte->setTipoMascota($mascota->getTipo());
+            $reporte->setColor($mascota->getColor());
+            $reporte->setFechaReporte(new \DateTimeImmutable());
+            $reporte->setFoto($mascota->getFoto());
+
+            $persona = $this->getUser()->getPersona();
+
+            $reporte->setPersonaReporta(
+                (string) $persona->getId()
+            );
+
+            $mascota->setEstado('perdida');
+
+            $em->persist($reporte);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'El reporte de la mascota fue registrado correctamente.'
+            );
+
+            return $this->redirectToRoute('app_tarjeta_id');
+        }
+
+        return $this->render(
+            'particular/mis_mascotas/reportar.html.twig',
+            [
+                'form' => $form->createView(),
+                'mascota' => $mascota,
+            ]
+        );
     }
 }
