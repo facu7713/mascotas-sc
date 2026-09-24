@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Reporte de mascota</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+
+            .header {
+                text-align: center;
+                border-bottom: 2px solid #333;
+                padding-bottom: 10px;
+            }
+
+            .card {
+                text-align: center;
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin-top: 20px;
+                border-radius: 8px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>
+                {% if reporte.tipoReporte == 'perdido' %}
+                    ¡¡¡ SE BUSCA !!!
+                {% else %}
+                    MASCOTA ENCONTRADA
+                {% endif %}
+            </h1>
+        </div>
+
+        <div class="card">
+            {% if fotoBase64 %}
+                <img
+                    src="{{ fotoBase64 }}"
+                    alt="Foto de {{ reporte.nombreMascota }}"
+                    style="width: 100%; max-width: 350px; height: 300px; object-fit: cover; border-radius: 8px;"
+                >
+            {% endif %}
+
+            <h2>Nombre: {{ reporte.nombreMascota }}</h2>
+            <p><strong>Tipo:</strong> {{ reporte.tipoMascota|capitalize }}</p>
+            <p><strong>Color:</strong> {{ reporte.color }}</p>
+            <p><strong>Barrio:</strong> {{ reporte.ubicacion }}</p>
+            <p><strong>Fecha del reporte:</strong> {{ reporte.fechaReporte|date('d/m/Y') }}</p>
+            <p><strong>Descripción:</strong> {{ reporte.descripcion }}</p>
+
+            <h2>Datos de quien reportó</h2>
+
+            {% if persona_reporte %}
+                <p>
+                    <strong>Nombre:</strong>
+                    {{ persona_reporte.nombre }} {{ persona_reporte.apellido }}
+                </p>
+                <p><strong>DNI:</strong> {{ persona_reporte.dni }}</p>
+                <p><strong>Dirección:</strong> {{ persona_reporte.direccion }}</p>
+                <p><strong>Teléfono:</strong> {{ persona_reporte.telefono }}</p>
+            {% else %}
+                <p>Los datos de la persona que reportó no están disponibles.</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

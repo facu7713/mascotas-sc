@@ -24,6 +24,25 @@ Registro de Reportes Encontrados | Mascotas SC
 
     </div>
 
+    {% for message in app.flashes('success') %}
+
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+
+            <i class="bi bi-bookmark-check"></i>
+
+                {{ message }}
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Cerrar">
+            </button>
+
+        </div>
+
+    {% endfor %}
+
     {% if reportes is empty %}
 
         <div class="text-center py-5">
@@ -122,24 +141,41 @@ Registro de Reportes Encontrados | Mascotas SC
 
                             </div>
 
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-person me-2"></i>
+                                Quien lo reportó:
+                                {{ nombresPersonas[reporte.id] ?? 'No disponible' }}
+                            </p>
+
 
                             <div class="d-grid gap-2">
 
                                 <a
-                                    href="#"
+                                    href="{{ path('app_mascota_reporte_pdf', {id: reporte.id}) }}"
                                     class="btn btn-outline-danger"
                                 >
                                     <i class="bi bi-file-earmark-pdf me-2"></i>
                                     Ver PDF
                                 </a>
 
-                                <a
-                                    href="#"
-                                    class="btn btn-outline-secondary"
+                                <form
+                                    method="post"
+                                    action="{{ path('app_reporte_eliminar', {
+                                        id: reporte.id
+                                    }) }}"
+                                    onsubmit="return confirm('¿Estás seguro de que querés eliminar este reporte?');"
                                 >
-                                    <i class="bi bi-trash me-2"></i>
-                                    Eliminar
-                                </a>
+                                    <input
+                                        type="hidden"
+                                        name="_token"
+                                        value="{{ csrf_token('eliminar_reporte' ~ reporte.id) }}"
+                                    >
+
+                                    <button type="submit" class="btn btn-outline-secondary w-100">
+                                        <i class="bi bi-trash me-2"></i>
+                                        Eliminar
+                                    </button>
+                                </form>
 
                             </div>
 

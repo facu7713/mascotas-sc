@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Mascota;
+use App\Entity\ReporteMascota;
+use App\Repository\PersonaRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -68,4 +70,81 @@ class MascotaPdfController extends AbstractController
             ]
         );
     }
+
+    #[Route('/reporte/{id}/pdf', name: 'app_mascota_reporte_pdf')]
+    public function descargarPdfReporte(
+        ReporteMascota $reporte,
+        PersonaRepository $personaRepository
+    ): Response {
+        $projectDir = $this->getParameter('kernel.project_dir');
+
+        // Buscar la persona que realizó el reporte usando el ID guardado
+        $personaReporte = null;
+
+        if ($reporte->getPersonaReporta()) {
+            $personaReporte = $personaRepository->find(
+                (int) $reporte->getPersonaReporta()
+            );
+        }
+
+        // Convertir la foto del reporte a Base64
+        $fotoBase64 = null;
+
+        if ($reporte->getFoto()) {
+            $fotoPath = $projectDir . '/public/' . ltrim(
+                $reporte->getFoto(),
+                '/'
+            );
+
+            if (is_file($fotoPath)) {
+                $fotoData = file_get_contents($fotoPath);
+                $mimeType = mime_content_type($fotoPath);
+
+                if ($fotoData !== false && $mimeType !== false) {
+                    $fotoBase64 = 'data:' . $mimeType . ';base64,' .
+                        base64_encode($fotoData);
+                }
+            }
+        }
+
+        $html = $this->renderView('pdf_reporte.html.twig', [
+            'reporte' => $reporte,
+            'persona_reporte' => $personaReporte,
+            'fotoBase64' => $fotoBase64,
+        ]);
+
+        // Configurar Dompdf
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Renderizar la plantilla con los datos del reporte
+        $html = $this->renderView('pdf_reporte.html.twig', [
+            'reporte' => $reporte,
+            'persona_reporte' => $personaReporte,
+            'fotoBase64' => $fotoBase64,
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $tipoReporte = $reporte->getTipoReporte() === 'perdido'
+            ? 'perdido'
+            : 'encontrado';
+
+        return new Response(
+            $dompdf->output(),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="reporte_' .
+                    $tipoReporte . '_' . $reporte->getId() . '.pdf"',
+            ]
+        );
+    }
+
 }
