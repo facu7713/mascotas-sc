@@ -82,7 +82,11 @@
 
                             {{ form_label(form.currentPassword) }}
 
-                            {{ form_widget(form.currentPassword) }}
+                            {{ form_widget(form.currentPassword, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
 
                             {{ form_errors(form.currentPassword) }}
 
@@ -93,7 +97,11 @@
 
                             {{ form_label(form.newPassword.first) }}
 
-                            {{ form_widget(form.newPassword.first) }}
+                            {{ form_widget(form.newPassword.first, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
 
                             {{ form_errors(form.newPassword.first) }}
 
@@ -104,7 +112,11 @@
 
                             {{ form_label(form.newPassword.second) }}
 
-                            {{ form_widget(form.newPassword.second) }}
+                            {{ form_widget(form.newPassword.second, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
 
                             {{ form_errors(form.newPassword.second) }}
 

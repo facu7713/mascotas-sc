@@ -74,4 +74,41 @@ final class VoluntarioController extends AbstractController
             ]
         );
     }
+
+    #[Route(
+        '/{id}/eliminar',
+        name: 'app_eliminar_postulacion',
+        methods: ['POST']
+    )]
+    public function eliminar_postulacion(
+        Postulante $postulante,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+    
+        if (!$this->isCsrfTokenValid(
+            'eliminar_postulacion' . $postulante->getId(),
+            $request->request->get('_token')
+        )) {
+            throw $this->createAccessDeniedException(
+                'Token de seguridad inválido.'
+            );
+        }
+    
+        if ($postulante->getPersona() !== $this->getUser()->getPersona()) {
+            throw $this->createAccessDeniedException(
+                'No podés eliminar esta postulación.'
+            );
+        }
+    
+        $em->remove($postulante);
+        $em->flush();
+    
+        $this->addFlash(
+            'success',
+            'Tu postulación fue eliminada correctamente.'
+        );
+    
+        return $this->redirectToRoute('app_voluntario');
+    }
 }

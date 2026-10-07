@@ -29,34 +29,58 @@
                                 {# Campos pertenecientes a la entidad Persona #}
                                 <div class="col-md-6">
                                     {{ form_label(form.persona.nombre) }}
-                                    {{ form_widget(form.persona.nombre) }}
+                                    {{ form_widget(form.persona.nombre, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.persona.nombre) }}
                                 </div>
                                 <div class="col-md-6">
                                     {{ form_label(form.persona.apellido) }}
-                                    {{ form_widget(form.persona.apellido) }}
+                                    {{ form_widget(form.persona.apellido, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.persona.apellido) }}
                                 </div>
                                 <div class="col-md-6">
                                     {{ form_label(form.persona.dni) }}
-                                    {{ form_widget(form.persona.dni) }}
+                                    {{ form_widget(form.persona.dni, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.persona.dni) }}
                                 </div>
                                 <div class="col-md-6">
                                     {{ form_label(form.persona.telefono) }}
-                                    {{ form_widget(form.persona.telefono) }}
+                                    {{ form_widget(form.persona.telefono, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.persona.telefono) }}
                                 </div>
                                 <div class="col-12">
                                     {{ form_label(form.persona.direccion) }}
-                                    {{ form_widget(form.persona.direccion) }}
+                                    {{ form_widget(form.persona.direccion, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.persona.direccion) }}
                                 </div>
 
                                 {# Campo perteneciente a la entidad User #}
                                 <div class="col-12">
                                     {{ form_label(form.email) }}
-                                    {{ form_widget(form.email) }}
+                                    {{ form_widget(form.email, {
+                                        attr: {
+                                            class: 'form-control'
+                                        }
+                                    }) }}
                                     {{ form_errors(form.email) }}
                                 </div>
                             </div>

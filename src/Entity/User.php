@@ -42,6 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Valid]
     private ?Persona $persona = null;
 
     /**

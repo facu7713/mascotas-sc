@@ -181,15 +181,34 @@
 
                 {% endif %}
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-center gap-3 mt-3">
 
                     <a href="{{ path('app_particular') }}"
-                        class="btn btn-primary">
+                    class="btn btn-primary">
 
                         <i class="bi bi-arrow-left me-2"></i>
                         Volver
 
                     </a>
+
+
+                    <form method="post"
+                        action="{{ path('app_eliminar_postulacion', {id: postulante.id}) }}"
+                        onsubmit="return confirm('¿Estás seguro de que querés eliminar tu postulación de voluntario?');">
+
+                        <input type="hidden"
+                            name="_token"
+                            value="{{ csrf_token('eliminar_postulacion' ~ postulante.id) }}">
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            <i class="bi bi-trash me-2"></i>
+                            Eliminar tu Postulación
+
+                        </button>
+
+                    </form>
 
                 </div>
 
