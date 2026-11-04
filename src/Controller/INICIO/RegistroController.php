@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\INICIO;
 
 use App\Entity\Persona;
 use App\Entity\User;
