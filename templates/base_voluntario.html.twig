@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Panel Voluntario | Mascotas SC
+{% endblock %}
+
+{% block body %}
+
+    {% include 'components/header/header_voluntario.html.twig' %}
+
+    <div class="d-flex min-vh-100 w-100">
+
+        <!-- Agregamos w-100 explícito aquí -->
+        <div class="d-flex flex-column w-100">
+
+            <main class="container-fluid p-4 w-100">
+
+                {% block contenido %}
+
+                {% endblock %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+    {% include 'components/footer/footer_voluntario.html.twig' %}
+
+{% endblock %}
