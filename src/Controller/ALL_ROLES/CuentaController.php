@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\ROLE_USER;
+namespace App\Controller\ALL_ROLES;
 
 use App\Form\EditarPerfilType;
 use App\Form\ChangePasswordType;
@@ -12,18 +12,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/particular/cuenta_usuario')]
+#[Route('/ALL_ROLES/cuenta')]
 #[IsGranted('ROLE_USER')]
 
 final class CuentaController extends AbstractController
 {
-    #[Route('', name: 'app_cuenta')]
+    #[Route('/cuenta', name: 'app_cuenta')]
     public function index(): Response
     {
         $usuario = $this->getUser();
 
         return $this->render(
-            'particular/cuenta_usuario/mi_cuenta.html.twig',
+            'ALL_ROLES/cuenta_usuario/mi_cuenta.html.twig',
             [
                 'usuario' => $usuario,
             ]
@@ -46,7 +46,7 @@ final class CuentaController extends AbstractController
             return $this->redirectToRoute('app_cuenta');
         }
 
-        return $this->render('particular/cuenta_usuario/edit_cuenta.html.twig', [
+        return $this->render('ALL_ROLES/cuenta_usuario/edit_cuenta.html.twig', [
             'form' => $form->createView(),
             'usuario' => $usuario,
         ]);
@@ -126,7 +126,7 @@ final class CuentaController extends AbstractController
 
 
         return $this->render(
-            'particular/cuenta_usuario/cambiar_contrasena.html.twig',
+            'ALL_ROLES/cuenta_usuario/cambiar_contrasena.html.twig',
             [
                 'form' => $form->createView(),
             ]

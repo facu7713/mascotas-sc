@@ -39,19 +39,25 @@
 
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" href="#">
-                        <i class="bi bi-file-earmark-plus fs-5"></i> Registrar Usuario 
+                        <i class="bi bi-person-plus"></i> Registrar Usuario 
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" href="#">
-                        <i class="bi bi-card-list fs-5"></i> Users Registrados
+                        <i class="bi bi-file-earmark-person"></i> Users Registrados
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" href="#">
                         <i class="bi bi-card-list fs-5"></i> Ver Postulaciones
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" href="#">
+                        <i class="bi bi-prescription2"></i> Vacunas
                     </a>
                 </li>
                 
@@ -70,24 +76,33 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            Más Acciones
+                            <i class="bi bi-window-plus"></i> Más Acciones
                         </a>
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="#">Registrar Mascota</a>
+                                <a class="dropdown-item" href="#"> 
+                                    <i class="bi bi-file-earmark-richtext"></i>
+                                    Registrar Mascota
+                                </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Mascotas Registradas</a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-list-ol"></i>
+                                    Mascotas Registradas
+                                </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Propietarios</a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-person-lines-fill"></i>
+                                    Propietarios
+                                </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Vacunas</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Reportes</a>
+                                <a class="dropdown-item" href="{{ path('app_reportes_mascotas') }}">
+                                    <i class="bi bi-file-earmark-richtext"></i> 
+                                    Reportes
+                                </a>
                             </li>
                         </ul>
                     </div>

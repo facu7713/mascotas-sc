@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\ROLE_USER;
+namespace App\Controller\ALL_ROLES;
 
 use App\Entity\ReporteMascota;
 use App\Form\ReporteType;
@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/particular/reportes_mascotas')]
+#[Route('/ALL_ROLES/reportes')]
 #[IsGranted('ROLE_USER')]
 
 final class ReportesMascotasController extends AbstractController
 {
-    #[Route('', name: 'app_reportes_mascotas')]
+    #[Route('/reportes', name: 'app_reportes_mascotas')]
     public function index(
         Request $request,
         EntityManagerInterface $em
@@ -73,7 +73,7 @@ final class ReportesMascotasController extends AbstractController
         }
 
         return $this->render(
-            'particular/reportes_mascotas/form_reporte.html.twig',
+            'ALL_ROLES/reportes_mascotas/form_reporte.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -105,7 +105,7 @@ final class ReportesMascotasController extends AbstractController
 
 
         return $this->render(
-            'particular/reportes_mascotas/perdidos.html.twig',
+            'ALL_ROLES/reportes_mascotas/perdidos.html.twig',
             [
                 'reportes' => $reportes,
                 'nombresPersonas' => $nombresPersonas,
@@ -138,7 +138,7 @@ final class ReportesMascotasController extends AbstractController
 
         
         return $this->render(
-            'particular/reportes_mascotas/encontrados.html.twig',
+            'ALL_ROLES/reportes_mascotas/encontrados.html.twig',
             [
                 'reportes' => $reportes,
                 'nombresPersonas' => $nombresPersonas,

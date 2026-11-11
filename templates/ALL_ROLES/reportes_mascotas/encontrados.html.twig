@@ -1,4 +1,10 @@
-{% extends 'base_particular.html.twig' %}
+{% extends
+    is_granted ('ROLE_ADMIN')
+        ? 'base_admin.html.twig'
+        : (is_granted ('ROLE_VOLUNTARIO')
+            ? 'base_voluntario.html.twig'
+            : 'base_particular.html.twig')
+%}
 
 {% block title %}
 Registro de Reportes Encontrados | Mascotas SC
